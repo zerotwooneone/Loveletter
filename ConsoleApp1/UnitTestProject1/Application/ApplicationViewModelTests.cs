@@ -1,7 +1,9 @@
+using System;
 using System.Reactive.Subjects;
 using ConsoleApp1.Application;
 using ConsoleApp1.Game;
 using ConsoleApp1.Lobby;
+using ConsoleApp1.Player;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -42,11 +44,15 @@ namespace UnitTestProject1.Application
         {
             // Arrange
             ISubject<GameParams> gameSubject = new Subject<GameParams>();
-            var expected = new Lobby(gameSubject);
+            var playerSubject = new Subject<PlayerParams>();
+            var expected = new Lobby(gameSubject, playerSubject);
             mockLobbyFactory
                 .Setup(lf => lf.CreateLobby(null))
                 .Returns(expected);
-            
+            //_consoleService
+            //    .Setup(cs => cs.WriteLine(It.IsAny<string>()))
+            //    .Verifiable();
+
             // Act
             ApplicationViewModel viewModel = this.CreateViewModel();
             viewModel.Start();
@@ -62,7 +68,8 @@ namespace UnitTestProject1.Application
             // Arrange
             var gameParams = new GameParams();
             ISubject<GameParams> gameSubject = new BehaviorSubject<GameParams>(gameParams);
-            var lobby = new Lobby(gameSubject);
+            var playerSubject = new Subject<PlayerParams>();
+            var lobby = new Lobby(gameSubject, playerSubject);
             mockLobbyFactory
                 .Setup(lf => lf.CreateLobby(null))
                 .Returns(lobby);
@@ -70,7 +77,13 @@ namespace UnitTestProject1.Application
             mockGameFactory
                 .Setup(gf => gf.CreateGame(gameParams))
                 .Returns(expected);
-            
+            //_consoleService
+            //    .Setup(cs => cs.WriteLine(It.IsAny<string>()))
+            //    .Verifiable();
+            //_consoleService
+            //    .Setup(cs => cs.ReadLine())
+            //    .Returns("test");
+
             // Act
             ApplicationViewModel viewModel = this.CreateViewModel();
             viewModel.Start();
@@ -86,12 +99,15 @@ namespace UnitTestProject1.Application
             // Arrange
             var gameParams = new GameParams();
             ISubject<GameParams> gameSubject = new BehaviorSubject<GameParams>(gameParams);
-            var lobby = new Lobby(gameSubject);
+            var playerSubject = new Subject<PlayerParams>();
+            var lobby = new Lobby(gameSubject, playerSubject);
             mockLobbyFactory
                 .Setup(lf => lf.CreateLobby(null))
                 .Returns(lobby);
             var lobbyParams = new LobbyParams();
-            var expected = new Lobby(new Subject<GameParams>());
+
+            ISubject<GameParams> gameSubject2 = new Subject<GameParams>();
+            var expected = new Lobby(gameSubject2, playerSubject);
             mockLobbyFactory
                 .Setup(lf => lf.CreateLobby(lobbyParams))
                 .Returns(expected);
@@ -100,7 +116,7 @@ namespace UnitTestProject1.Application
             mockGameFactory
                 .Setup(gf => gf.CreateGame(gameParams))
                 .Returns(game);
-            
+
             // Act
             ApplicationViewModel viewModel = this.CreateViewModel();
             viewModel.Start();

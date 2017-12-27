@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Reactive.Subjects;
 using ConsoleApp1.Game;
+using ConsoleApp1.Player;
 
 namespace ConsoleApp1.Lobby
 {
     public class Lobby
     {
+        public IObservable<PlayerParams> PlayerSubject { get; }
         private readonly ISubject<GameParams> _subject;
         public Guid Id { get; private set; }
         public IObservable<GameParams> GameObservable => _subject;
 
-        public Lobby(ISubject<GameParams> gameSubject)
+        public Lobby(ISubject<GameParams> gameSubject,
+            IObservable<PlayerParams> playerSubject)
         {
+            PlayerSubject = playerSubject;
             _subject = gameSubject;
         }
     }
