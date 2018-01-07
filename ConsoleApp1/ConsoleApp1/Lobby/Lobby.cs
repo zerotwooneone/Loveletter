@@ -53,7 +53,9 @@ namespace ConsoleApp1.Lobby
 
         private bool ReadyCheck()
         {
-            return _readyPlayers.Count > 1 && _lobbyPlayers.Count == _readyPlayers.Count;
+            const int minimumAllowedPlayers = 1;
+            const int maxAllowedPlayers = 4;
+            return _readyPlayers.Count >= minimumAllowedPlayers && _readyPlayers.Count <= maxAllowedPlayers && _lobbyPlayers.Count == _readyPlayers.Count;
         }
     }
 }
