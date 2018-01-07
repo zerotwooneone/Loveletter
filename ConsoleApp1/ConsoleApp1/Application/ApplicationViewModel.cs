@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using ConsoleApp1.Game;
 using ConsoleApp1.Lobby;
+using ConsoleApp1.Player;
+using ConsoleApp1.User;
 
 namespace ConsoleApp1.Application
 {
@@ -14,19 +18,24 @@ namespace ConsoleApp1.Application
         private readonly ILobbyService _lobbyService;
         private readonly IGameService _gameService;
         private readonly IConsoleService _consoleService;
+        
+        private readonly IUserService _userService;
         private bool _doContinue;
         
-        public ApplicationViewModel(ILobbyFactory lobbyFactory,
-            IGameFactory gameFactory,
-            ILobbyService lobbyService,
-            IGameService gameService,
-            IConsoleService consoleService)
+        
+        public ApplicationViewModel(ILobbyFactory lobbyFactory, 
+            IGameFactory gameFactory, 
+            ILobbyService lobbyService, 
+            IGameService gameService, 
+            IConsoleService consoleService, 
+            IUserService userService)
         {
             _lobbyFactory = lobbyFactory;
             _gameFactory = gameFactory;
             _lobbyService = lobbyService;
             _gameService = gameService;
             _consoleService = consoleService;
+            _userService = userService;
         }
 
         public Lobby.Lobby Lobby { get; private set; }
@@ -35,17 +44,28 @@ namespace ConsoleApp1.Application
         public void Start()
         {
             _doContinue = true;
-            LobbyParams lobbyParams=null;
+            UserPlayerParams = _userService.GetPlayerParams();
+//UserPlayer = _playerFactory.CreatePlayer(UserPlayerParams);
+            LobbyParams lobbyParams=new LobbyParams
+            {
+                Players = new PlayerParams[]{UserPlayerParams}
+            };
             CreateLobby(lobbyParams);
         }
+
+        public Subject<bool> UserReadySubject { get; private set; }
+
+        public PlayerParams UserPlayerParams { get; private set; }
+
+        public Player.Player UserPlayer { get; private set; }
 
         private void CreateLobby(LobbyParams lobbyParams)
         {
             Lobby = _lobbyFactory.CreateLobby(lobbyParams);
-            Lobby
-                .GameObservable
-                .Take(1)
-                .Subscribe(CreateGame);
+            //Lobby
+            //    .GameObservable
+            //    .Take(1)
+            //    .Subscribe(CreateGame);
         }
 
         private void CreateGame(GameParams gameParams)
@@ -56,6 +76,9 @@ namespace ConsoleApp1.Application
                 .Take(1)
                 .Subscribe(CreateLobby);
         }
+
+
+
 
         public async Task<bool> DoContinue()
         {

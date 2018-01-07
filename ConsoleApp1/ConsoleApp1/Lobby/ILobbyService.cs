@@ -5,6 +5,6 @@ namespace ConsoleApp1.Lobby
 {
     public interface ILobbyService
     {
-        IObservable<GameParams> StartGame { get; }
+        void EndLobby(Guid lobbyId);
     }
 }

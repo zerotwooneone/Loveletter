@@ -1,6 +1,9 @@
-﻿namespace ConsoleApp1.Player
+﻿using System;
+
+namespace ConsoleApp1.Player
 {
     public class PlayerParams
     {
+        
     }
 }

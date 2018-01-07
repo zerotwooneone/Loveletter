@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConsoleApp1.Player
 {
     public class Player
     {
-        public Guid Id { get; set; }
-    }
+        public Guid Id { get; }
 
-    public interface IPlayerConnectionService
-    {
-        //IObservable<PlayerConnection>
+        public IObservable<bool> ReadyObservable { get; }
+
+        public Player(IObservable<bool> readySubject, Guid id)
+        {
+            ReadyObservable = readySubject;
+            Id = id;
+        }
     }
 }
