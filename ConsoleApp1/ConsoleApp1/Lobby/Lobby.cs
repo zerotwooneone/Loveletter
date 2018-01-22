@@ -31,24 +31,7 @@ namespace ConsoleApp1.Lobby
         private void OnNewLobbyPlayer(Player.Player player)
         {
             _lobbyPlayers.Add(player);
-            player
-                .ReadyObservable
-                .Subscribe(ready =>
-                {
-                    if (ready)
-                    {
-                        _readyPlayers.TryAdd(player.Id, player);
-                    }
-                    else
-                    {
-                        _readyPlayers.Remove(player.Id);
-                    }
-                    var allReady =ReadyCheck();
-                    if (allReady != _allPlayersReady.Value)
-                    {
-                        _allPlayersReady.OnNext(allReady);
-                    }
-                });
+            
         }
 
         private bool ReadyCheck()

@@ -2,6 +2,6 @@
 {
     public interface IGameFactory
     {
-        Game CreateGame(GameParams gameParams);
+        IInitialGameState CreateGame();
     }
 }

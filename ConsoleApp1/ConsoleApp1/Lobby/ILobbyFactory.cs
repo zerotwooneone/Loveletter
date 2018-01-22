@@ -2,6 +2,6 @@
 {
     public interface ILobbyFactory
     {
-        Lobby CreateLobby(LobbyParams lobbyParams = null);
+        Lobby CreateLobby(LobbyParams lobbyParams);
     }
 }
