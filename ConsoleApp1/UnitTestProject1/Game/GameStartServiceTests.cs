@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using ConsoleApp1.Card;
-using ConsoleApp1.Deck;
 using ConsoleApp1.Game;
 using ConsoleApp1.Player;
 using ConsoleApp1.Round;
@@ -16,11 +14,10 @@ namespace UnitTestProject1.Game
     {
         private MockRepository _mockRepository;
 
-        private Mock<IDeckFactory> _DeckFactory;
-        private Mock<IDeckShuffleService> _DeckShuffleService;
         private Mock<IRoundFactory> _RoundFactory;
         private Mock<IRoundStartService> _RoundStartService;
         private readonly Guid _gameId;
+        private Mock<IPlayerFactory> _PlayerFactory;
 
         public GameStartServiceTests()
         {
@@ -32,10 +29,9 @@ namespace UnitTestProject1.Game
         {
             _mockRepository = new MockRepository(MockBehavior.Strict);
 
-            _DeckFactory = _mockRepository.Create<IDeckFactory>();
-            _DeckShuffleService = _mockRepository.Create<IDeckShuffleService>();
             _RoundFactory = _mockRepository.Create<IRoundFactory>();
             _RoundStartService = _mockRepository.Create<IRoundStartService>();
+            _PlayerFactory = _mockRepository.Create<IPlayerFactory>();
         }
 
         [TestCleanup]
@@ -48,24 +44,26 @@ namespace UnitTestProject1.Game
         public void StartGame_SetsRound()
         {
             // Arrange
-            var players = new Dictionary<Guid, IGamePlayer>();
-            var drawDeck = new List<IDrawableCardState>();
+            var player1Guid = Guid.Parse("115e08ed-510e-4b79-acbc-a40b2ee40d08");
+            var gamePlayer1 = new Player(player1Guid,null,null);
+            var players = new Dictionary<Guid, IGamePlayer>{{player1Guid, gamePlayer1}};
             IRunningRoundState roundState=null;
-            var initialGameState = new GameState(_gameId, players, drawDeck, roundState);
-
-            IEnumerable<IShufflableCardState> deckFactoryDeck = null;
-            _DeckFactory
-                .Setup(df => df.Create())
-                .Returns(deckFactoryDeck);
-
-            var shuffledDeck = new List<IDrawableCardState>();
-            _DeckShuffleService
-                .Setup(dss => dss.Shuffle(deckFactoryDeck))
-                .Returns(shuffledDeck);
+            var initialGameState = new GameState(_gameId, players, roundState);
+            
+            var roundPlayer1 = new Player(player1Guid, new List<IDiscardedCardState>(), new List<IDiscardableCardState>());
+            _PlayerFactory
+                .Setup(pf => pf.CreateRoundPlayer(gamePlayer1))
+                .Returns(roundPlayer1);
 
             var initialRoundState = GetRoundState();
+
+            
+            IEnumerable<IRoundPlayer> roundPlayers=new []
+            {
+                roundPlayer1,
+            };
             _RoundFactory
-                .Setup(rf => rf.CreateRound())
+                .Setup(rf => rf.CreateRound(roundPlayers))
                 .Returns(initialRoundState);
 
             var runningRoundState = GetRoundState();
@@ -82,65 +80,25 @@ namespace UnitTestProject1.Game
             // Assert
             Assert.AreEqual(actual,expected);
         }
-
-        [TestMethod]
-        public void StartGame_ShufflesDeck()
-        {
-            // Arrange
-            var players = new Dictionary<Guid, IGamePlayer>();
-            var drawDeck = new List<IDrawableCardState>();
-            IRunningRoundState roundState = null;
-            var initialGameState = new GameState(_gameId, players, drawDeck, roundState);
-
-            IEnumerable<IShufflableCardState> deckFactoryDeck = null;
-            _DeckFactory
-                .Setup(df => df.Create())
-                .Returns(deckFactoryDeck);
-
-            var shuffledDeck = new List<IDrawableCardState>();
-            var expected = shuffledDeck;
-            _DeckShuffleService
-                .Setup(dss => dss.Shuffle(deckFactoryDeck))
-                .Returns(shuffledDeck);
-
-            var initialRoundState = GetRoundState();
-            _RoundFactory
-                .Setup(rf => rf.CreateRound())
-                .Returns(initialRoundState);
-
-            var runningRoundState = GetRoundState();
-            _RoundStartService
-                .Setup(rss => rss.StartRound(initialRoundState))
-                .Returns(runningRoundState);
-
-            // Act
-            GameStartService service = CreateService();
-            var gameState = service.StartGame(initialGameState);
-            var actual = gameState.DrawDeck;
-
-            // Assert
-            Assert.IsTrue(expected.SequenceEqual(actual));
-        }
-
+        
         public static RoundState GetRoundState()
         {
             var roundPlayers = new IRoundPlayer[0];
             var remainingPlayers = new List<IRoundPlayer>();
             var shufflableDeck = new List<IShufflableCardState>();
-            var removedFromGame = new List<IDrawableCardState>();
+            var removedFromRound = new List<IDrawableCardState>();
             var roundDrawDeck = new List<IDrawableCardState>();
             RoundState roundState =
-                new RoundState(roundPlayers, remainingPlayers, shufflableDeck, removedFromGame, roundDrawDeck);
+                new RoundState(roundPlayers, remainingPlayers, removedFromRound, roundDrawDeck);
             return roundState;
         }
 
         private GameStartService CreateService()
         {
             return new GameStartService(
-                _DeckFactory.Object,
-                _DeckShuffleService.Object,
                 _RoundFactory.Object,
-                _RoundStartService.Object);
+                _RoundStartService.Object,
+                _PlayerFactory.Object);
         }
     }
 }

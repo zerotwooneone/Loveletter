@@ -12,8 +12,8 @@ namespace ConsoleApp1.Round
     {
         public int RoundIndex { get; } //
         public IEnumerable<IRoundPlayer> Players { get; } //
-        public IList<IShufflableCardState> ShufflableDeck { get; }
-        public IList<IDrawableCardState> RemovedFromGame { get; }
+        public IEnumerable<IShufflableCardState> ShufflableDeck { get; }
+        public IList<IDrawableCardState> RemovedFromRound { get; }
         public IRoundPlayer WinningPlayer { get; set; } //
         public IList<IRoundPlayer> RemainingPlayers { get; } //
         public IList<IDrawableCardState> DrawDeck { get; }
@@ -23,14 +23,14 @@ namespace ConsoleApp1.Round
 
         public RoundState(IEnumerable<IRoundPlayer> players,
             IList<IRoundPlayer> remainingPlayers,
-            IList<IShufflableCardState> shufflableDeck,
-            IList<IDrawableCardState> removedFromGame,
+            IList<IDrawableCardState> removedFromRound,
             IList<IDrawableCardState> drawDeck,
             int roundIndex = 0,
             IRoundPlayer winningPlayer = null,
             IRoundPlayer currentPlayer = null,
             IDrawableTurnState drawableTurnState = null,
-            IDiscardableTurnState discardableTurnState = null)
+            IDiscardableTurnState discardableTurnState = null,
+            IEnumerable<IShufflableCardState> shufflableDeck = null)
         {
             RoundIndex = roundIndex;
             var roundPlayers = players as IRoundPlayer[] ?? players.ToArray();
@@ -41,7 +41,7 @@ namespace ConsoleApp1.Round
             DrawableTurnState = drawableTurnState;
             DiscardableTurnState = discardableTurnState;
             ShufflableDeck = shufflableDeck;
-            RemovedFromGame = removedFromGame;
+            RemovedFromRound = removedFromRound;
             DrawDeck = drawDeck;
         }
     }

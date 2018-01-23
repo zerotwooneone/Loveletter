@@ -10,20 +10,17 @@ namespace ConsoleApp1.Game
     {
         private readonly IDictionary<Guid, IGamePlayer> _players;
         public IRunningRoundState RoundState { get; set; }
-        public IList<IDrawableCardState> DrawDeck { get; }
         public Guid Id { get; }
         public IEnumerable<IGamePlayer> Players => _players.Values;
         
         public GameState(Guid id,
             IDictionary<Guid, 
                 IGamePlayer> players,
-            IList<IDrawableCardState> drawDeck, 
             IRunningRoundState roundState = null)
         {
             Id = id;
             _players = players;
             RoundState = roundState;
-            DrawDeck = drawDeck;
         }
     }
 }
