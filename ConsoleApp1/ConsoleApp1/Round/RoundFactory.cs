@@ -17,12 +17,12 @@ namespace ConsoleApp1.Round
         public IInitialRoundState CreateRound(IEnumerable<IRoundPlayer> players)
         {
             IList<IRoundPlayer> remainingPlayers = null;
-            IList<IDrawableCardState> removedFromGame = CreateRemovedFromRound();
+            IList<ISetAsideCardState> removedFromRound = CreateRemovedFromRound();
             IList<IDrawableCardState> drawDeck = null;
             IEnumerable<IShufflableCardState> shufflableDeck = _deckFactory.Create();
             var round = new RoundState(players,
                 remainingPlayers,
-                removedFromGame,
+                removedFromRound,
                 drawDeck,
                 roundIndex: 0,
                 winningPlayer: null,
@@ -38,9 +38,9 @@ namespace ConsoleApp1.Round
             return new List<IRoundPlayer>();
         }
 
-        public IList<IDrawableCardState> CreateRemovedFromRound()
+        public IList<ISetAsideCardState> CreateRemovedFromRound()
         {
-            return new List<IDrawableCardState>();
+            return new List<ISetAsideCardState>();
         }
     }
 }

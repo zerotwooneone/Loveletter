@@ -86,7 +86,7 @@ namespace UnitTestProject1.Game
             var roundPlayers = new IRoundPlayer[0];
             var remainingPlayers = new List<IRoundPlayer>();
             var shufflableDeck = new List<IShufflableCardState>();
-            var removedFromRound = new List<IDrawableCardState>();
+            var removedFromRound = new List<ISetAsideCardState>();
             var roundDrawDeck = new List<IDrawableCardState>();
             RoundState roundState =
                 new RoundState(roundPlayers, remainingPlayers, removedFromRound, roundDrawDeck);

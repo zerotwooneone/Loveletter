@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.Card
 {
-    public class CardState : IDrawableCardState, IDiscardableCardState, IDiscardedCardState, IShufflableCardState
+    public class CardState : IDrawableCardState, IDiscardableCardState, IDiscardedCardState, IShufflableCardState, ISetAsideCardState
     {
         public int SuffledIndex { get; set; }
         public int Id { get; }

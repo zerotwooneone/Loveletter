@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ConsoleApp1.Card;
 
 namespace ConsoleApp1.Round
 {
@@ -22,12 +19,6 @@ namespace ConsoleApp1.Round
                 default:
                     throw new ArgumentException("Invalid number of players");
             }
-            return result;
-        }
-
-        public IEnumerable<IDrawableCardState> RemoveFromDeck(IList<IDrawableCardState> deck, int countToRemove)
-        {
-            var result = deck.Skip(countToRemove);
             return result;
         }
     }

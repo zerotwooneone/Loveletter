@@ -8,6 +8,6 @@ namespace ConsoleApp1.Round
     {
         IInitialRoundState CreateRound(IEnumerable<IRoundPlayer> players);
         IList<IRoundPlayer> CreateRemainingPlayers();
-        IList<IDrawableCardState> CreateRemovedFromRound();
+        IList<ISetAsideCardState> CreateRemovedFromRound();
     }
 }

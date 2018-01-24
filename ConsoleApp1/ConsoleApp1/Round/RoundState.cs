@@ -13,7 +13,7 @@ namespace ConsoleApp1.Round
         public int RoundIndex { get; } //
         public IEnumerable<IRoundPlayer> Players { get; } //
         public IEnumerable<IShufflableCardState> ShufflableDeck { get; }
-        public IList<IDrawableCardState> RemovedFromRound { get; }
+        public IList<ISetAsideCardState> RemovedFromRound { get; }
         public IRoundPlayer WinningPlayer { get; set; } //
         public IList<IRoundPlayer> RemainingPlayers { get; } //
         public IList<IDrawableCardState> DrawDeck { get; }
@@ -23,7 +23,7 @@ namespace ConsoleApp1.Round
 
         public RoundState(IEnumerable<IRoundPlayer> players,
             IList<IRoundPlayer> remainingPlayers,
-            IList<IDrawableCardState> removedFromRound,
+            IList<ISetAsideCardState> removedFromRound,
             IList<IDrawableCardState> drawDeck,
             int roundIndex = 0,
             IRoundPlayer winningPlayer = null,

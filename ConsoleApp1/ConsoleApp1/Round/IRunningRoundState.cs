@@ -9,7 +9,7 @@ namespace ConsoleApp1.Round
     {
         IList<IRoundPlayer> RemainingPlayers { get; }
         IList<IDrawableCardState> DrawDeck { get; }
-        IList<IDrawableCardState> RemovedFromRound { get; }
+        IList<ISetAsideCardState> RemovedFromRound { get; }
         IRoundPlayer CurrentPlayer { get; set; }
         IDrawableTurnState DrawableTurnState { get; set; }
         IDiscardableTurnState DiscardableTurnState { get; set; }

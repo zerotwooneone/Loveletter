@@ -99,28 +99,7 @@ namespace UnitTestProject1.Round
             // Assert
             Assert.AreEqual(expected, actual);
         }
-
-        [TestMethod]
-        public void CreateRound_SetPlayerHands()
-        {
-            // Arrange
-            IEnumerable<IRoundPlayer> players = new[] {
-                new Player(Guid.Parse("b0049b58-73a3-49a8-8ba1-f5d3fd9701a9"), null, null),
-                new Player(Guid.Parse("a7b9794d-a3f0-46ac-b69b-a2dbc3e12f18"), null, null) };
-
-            IEnumerable<IShufflableCardState> shufflalbeDeck = new[] { new CardState(0, 1) };
-            _deckFactory
-                .Setup(df => df.Create())
-                .Returns(shufflalbeDeck);
-
-            // Act
-            RoundFactory factory = this.CreateFactory();
-            var round = factory.CreateRound(players);
-            
-            // Assert
-            Assert.IsTrue(round.Players.All(p=>p.RoundHand!=null));
-        }
-
+        
         private RoundFactory CreateFactory()
         {
             return new RoundFactory(
