@@ -143,16 +143,16 @@ namespace UnitTestProject1.Round
             // Act
             RoundStartService service = CreateService();
             var round = service.StartRound(initialRound);
-            
+
             // Assert
-            Assert.IsTrue(round.RemainingPlayers.All(p=>p.RoundHand !=null));
+            Assert.IsTrue(round.RemainingPlayers.All(p => p.RoundHand != null));
         }
 
         [TestMethod]
         public void StartRound_AllPlayersInRound()
         {
             // Arrange
-            var player1 = new Player(Guid.Empty, null, null, outOfRound:true);
+            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
             IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
             IShufflableCardState shufflableCard = new CardState(0, 0);
             IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
@@ -198,7 +198,7 @@ namespace UnitTestProject1.Round
             var round = service.StartRound(initialRound);
 
             // Assert
-            Assert.IsTrue(round.RemainingPlayers.All(p=>p.OutOfRound==false));
+            Assert.IsTrue(round.RemainingPlayers.All(p => p.OutOfRound == false));
         }
 
         [TestMethod]
@@ -254,6 +254,171 @@ namespace UnitTestProject1.Round
 
             // Assert
             Assert.IsTrue(expected.SequenceEqual(actual));
+        }
+
+        [TestMethod]
+        public void StartRound_CurrentPlayerSet()
+        {
+            // Arrange
+            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
+            var expected = player1;
+            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            IShufflableCardState shufflableCard = new CardState(0, 0);
+            IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
+            IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
+
+            var remainingPlayers = new List<IRoundPlayer>();
+            _roundFactory
+                .Setup(rf => rf.CreateRemainingPlayers())
+                .Returns(remainingPlayers);
+            var removedFromRound = new List<ISetAsideCardState>();
+            _roundFactory
+                .Setup(rf => rf.CreateRemovedFromRound())
+                .Returns(removedFromRound);
+
+            var drawableCardState = new CardState(0, 0);
+            const int cardSetAsideCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount;
+            var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
+            _deckShuffleService
+                .Setup(dss => dss.Shuffle(shuffleableDeck))
+                .Returns(drawableDeck);
+
+            IDiscardableCardState discardableCardState = new CardState(0, 0);
+            _cardDrawService
+                .Setup(cds => cds.Draw(drawableCardState))
+                .Returns(discardableCardState);
+            ISetAsideCardState setAsideCardState = new CardState(0, 0);
+            _cardDrawService
+                .Setup(cds => cds.SetAside(drawableCardState))
+                .Returns(setAsideCardState);
+
+            _deckRemovalService
+                .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
+                .Returns(cardSetAsideCount);
+
+            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            _turnStateFactory
+                .Setup(tsf => tsf.CreateTurn())
+                .Returns(drawableTurnState);
+
+            // Act
+            RoundStartService service = CreateService();
+            var round = service.StartRound(initialRound);
+            var actual = round.CurrentPlayer;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void StartRound_DiscardableStateNull()
+        {
+            // Arrange
+            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
+            IDiscardableTurnState expected = null;
+            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            IShufflableCardState shufflableCard = new CardState(0, 0);
+            IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
+            IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
+
+            var remainingPlayers = new List<IRoundPlayer>();
+            _roundFactory
+                .Setup(rf => rf.CreateRemainingPlayers())
+                .Returns(remainingPlayers);
+            var removedFromRound = new List<ISetAsideCardState>();
+            _roundFactory
+                .Setup(rf => rf.CreateRemovedFromRound())
+                .Returns(removedFromRound);
+
+            var drawableCardState = new CardState(0, 0);
+            const int cardSetAsideCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount;
+            var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
+            _deckShuffleService
+                .Setup(dss => dss.Shuffle(shuffleableDeck))
+                .Returns(drawableDeck);
+
+            IDiscardableCardState discardableCardState = new CardState(0, 0);
+            _cardDrawService
+                .Setup(cds => cds.Draw(drawableCardState))
+                .Returns(discardableCardState);
+            ISetAsideCardState setAsideCardState = new CardState(0, 0);
+            _cardDrawService
+                .Setup(cds => cds.SetAside(drawableCardState))
+                .Returns(setAsideCardState);
+
+            _deckRemovalService
+                .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
+                .Returns(cardSetAsideCount);
+
+            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            _turnStateFactory
+                .Setup(tsf => tsf.CreateTurn())
+                .Returns(drawableTurnState);
+
+            // Act
+            RoundStartService service = CreateService();
+            var round = service.StartRound(initialRound);
+            var actual = round.DiscardableTurnState;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void StartRound_DrawableStateSet()
+        {
+            // Arrange
+            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
+            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            IShufflableCardState shufflableCard = new CardState(0, 0);
+            IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
+            IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
+
+            var remainingPlayers = new List<IRoundPlayer>();
+            _roundFactory
+                .Setup(rf => rf.CreateRemainingPlayers())
+                .Returns(remainingPlayers);
+            var removedFromRound = new List<ISetAsideCardState>();
+            _roundFactory
+                .Setup(rf => rf.CreateRemovedFromRound())
+                .Returns(removedFromRound);
+
+            var drawableCardState = new CardState(0, 0);
+            const int cardSetAsideCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount;
+            var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
+            _deckShuffleService
+                .Setup(dss => dss.Shuffle(shuffleableDeck))
+                .Returns(drawableDeck);
+
+            IDiscardableCardState discardableCardState = new CardState(0, 0);
+            _cardDrawService
+                .Setup(cds => cds.Draw(drawableCardState))
+                .Returns(discardableCardState);
+            ISetAsideCardState setAsideCardState = new CardState(0, 0);
+            _cardDrawService
+                .Setup(cds => cds.SetAside(drawableCardState))
+                .Returns(setAsideCardState);
+
+            _deckRemovalService
+                .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
+                .Returns(cardSetAsideCount);
+
+            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            var expected = drawableTurnState;
+            _turnStateFactory
+                .Setup(tsf => tsf.CreateTurn())
+                .Returns(drawableTurnState);
+
+            // Act
+            RoundStartService service = CreateService();
+            var round = service.StartRound(initialRound);
+            var actual = round.DrawableTurnState;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
         }
 
         private RoundStartService CreateService()
