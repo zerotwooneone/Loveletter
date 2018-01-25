@@ -17,5 +17,11 @@ namespace ConsoleApp1.Player
         {
             return new List<IDiscardedCardState>();
         }
+
+        public ITurnPlayer CreateTurnPlayer(IRoundPlayer player)
+        {
+            var turnPlayer = new Player(player.Id,null,turnHand,outOfRound:false,points:0);
+            return turnPlayer;
+        }
     }
 }

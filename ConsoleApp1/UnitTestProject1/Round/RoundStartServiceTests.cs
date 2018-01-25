@@ -83,7 +83,7 @@ namespace UnitTestProject1.Round
 
             IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn())
+                .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
 
             // Act
@@ -137,7 +137,7 @@ namespace UnitTestProject1.Round
 
             IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn())
+                .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
 
             // Act
@@ -190,7 +190,7 @@ namespace UnitTestProject1.Round
 
             IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn())
+                .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
 
             // Act
@@ -244,7 +244,7 @@ namespace UnitTestProject1.Round
 
             IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn())
+                .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
 
             // Act
@@ -299,7 +299,7 @@ namespace UnitTestProject1.Round
 
             IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn())
+                .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
 
             // Act
@@ -354,7 +354,7 @@ namespace UnitTestProject1.Round
 
             IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn())
+                .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
 
             // Act
@@ -409,7 +409,7 @@ namespace UnitTestProject1.Round
             IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
             var expected = drawableTurnState;
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn())
+                .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
 
             // Act

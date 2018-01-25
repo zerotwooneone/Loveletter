@@ -7,5 +7,6 @@ namespace ConsoleApp1.Player
     {
         IRoundPlayer CreateRoundPlayer(IGamePlayer gameStatePlayer);
         IList<IDiscardedCardState> CreateRoundDiscard();
+        ITurnPlayer CreateTurnPlayer(IRoundPlayer player);
     }
 }

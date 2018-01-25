@@ -47,7 +47,7 @@ namespace ConsoleApp1.Round
             }
             int roundIndex = round.RoundIndex;
             var currentPlayer = roundPlayers.First();
-            var drawableTurnState = _turnStateFactory.CreateTurn();
+            var drawableTurnState = _turnStateFactory.CreateTurn(currentPlayer);
             var runningRound = new RoundState(roundPlayers,
                 remainingPlayers,
                 removedFromRound,

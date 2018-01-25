@@ -1,7 +1,9 @@
-﻿namespace ConsoleApp1.Turn
+﻿using ConsoleApp1.Player;
+
+namespace ConsoleApp1.Turn
 {
     public interface ITurnStateFactory
     {
-        IDrawableTurnState CreateTurn();
+        IDrawableTurnState CreateTurn(IRoundPlayer player);
     }
 }
