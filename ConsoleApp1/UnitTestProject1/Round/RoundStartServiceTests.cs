@@ -81,7 +81,7 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
@@ -135,7 +135,7 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
@@ -188,7 +188,7 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
@@ -242,7 +242,7 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
@@ -297,7 +297,7 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
@@ -352,7 +352,7 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1))
                 .Returns(drawableTurnState);
@@ -406,7 +406,7 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, discardableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(player1);
             var expected = drawableTurnState;
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1))

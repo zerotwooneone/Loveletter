@@ -5,6 +5,6 @@ namespace ConsoleApp1.Turn
 {
     public interface IDiscardableTurnState : ITurnState
     {
-        IList<IDiscardableCardState> Hand { get; }
+        
     }
 }

@@ -9,12 +9,9 @@ namespace ConsoleApp1.Turn
     {
         public ITurnPlayerState PlayerState { get; }
 
-        public TurnState(ITurnPlayerState playerState, IDiscardableCardState startingHand)
+        public TurnState(ITurnPlayerState playerState)
         {
             PlayerState = playerState;
-            Hand = new []{ startingHand }.ToList();
         }
-
-        public IList<IDiscardableCardState> Hand { get; }
     }
 }

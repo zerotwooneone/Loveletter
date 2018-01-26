@@ -13,8 +13,7 @@ namespace ConsoleApp1.Turn
         public IDrawableTurnState CreateTurn(IRoundPlayerState playerState)
         {
             var turnPlayer = _playerFactory.CreateTurnPlayer(playerState);
-            var hand = playerState.RoundHand;
-            var turnState = new TurnState(turnPlayer, hand);
+            var turnState = new TurnState(turnPlayer);
             return turnState;
         }
     }
