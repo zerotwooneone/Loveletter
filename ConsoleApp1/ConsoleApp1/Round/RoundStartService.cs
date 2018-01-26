@@ -53,8 +53,8 @@ namespace ConsoleApp1.Round
                 removedFromRound,
                 shuffledDeck,
                 roundIndex,
-                winningPlayer: null,
-                currentPlayer: currentPlayer,
+                winningPlayerState: null,
+                currentPlayerState: currentPlayer,
                 drawableTurnState: drawableTurnState,
                 discardableTurnState: null,
                 shufflableDeck: null);

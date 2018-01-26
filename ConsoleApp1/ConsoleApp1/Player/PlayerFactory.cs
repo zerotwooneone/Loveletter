@@ -5,11 +5,11 @@ namespace ConsoleApp1.Player
 {
     public class PlayerFactory : IPlayerFactory
     {
-        public IRoundPlayer CreateRoundPlayer(IGamePlayer gameStatePlayer)
+        public IRoundPlayerState CreateRoundPlayer(IGamePlayerState gameStatePlayerState)
         {
             IList<IDiscardedCardState> roundDiscard = CreateRoundDiscard();
             IList<IDiscardableCardState> turnHand = null;
-            var roundPlayer = new Player(gameStatePlayer.Id, roundDiscard, turnHand, outOfRound: false, points: 0, roundHand: null, turnDiscard: null);
+            var roundPlayer = new PlayerState(gameStatePlayerState.Id, roundDiscard, turnHand, outOfRound: false, points: 0, roundHand: null, turnDiscard: null);
             return roundPlayer;
         }
 
@@ -18,11 +18,11 @@ namespace ConsoleApp1.Player
             return new List<IDiscardedCardState>(); 
         }
 
-        public ITurnPlayer CreateTurnPlayer(IRoundPlayer player)
+        public ITurnPlayerState CreateTurnPlayer(IRoundPlayerState playerState)
         {
             var turnHand=CreateTurnHand();
-            turnHand.Add(player.RoundHand);
-            var turnPlayer = new Player(player.Id,null,turnHand,outOfRound:false,points:0);
+            turnHand.Add(playerState.RoundHand);
+            var turnPlayer = new PlayerState(playerState.Id,null,turnHand,outOfRound:false,points:0);
             return turnPlayer;
         }
 

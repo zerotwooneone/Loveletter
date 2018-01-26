@@ -4,7 +4,7 @@ using ConsoleApp1.Card;
 
 namespace ConsoleApp1.Player
 {
-    public class Player : IGamePlayer, IRoundPlayer, ITurnPlayer
+    public class PlayerState : IGamePlayerState, IRoundPlayerState, ITurnPlayerState
     {
         public Guid Id { get; }
         public bool OutOfRound { get; set; }
@@ -14,7 +14,7 @@ namespace ConsoleApp1.Player
         public IList<IDiscardableCardState> TurnHand { get; }
         public IDiscardedCardState TurnDiscard { get; set; }
 
-        public Player(Guid id,
+        public PlayerState(Guid id,
             IList<IDiscardedCardState> roundDiscard,
             IList<IDiscardableCardState> turnHand,
             bool outOfRound = false,

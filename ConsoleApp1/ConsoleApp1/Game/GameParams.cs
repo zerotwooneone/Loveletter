@@ -5,6 +5,6 @@ namespace ConsoleApp1.Game
 {
     public class GameParams
     {
-        public IEnumerable<Player.Player> Players { get; set; }
+        public IEnumerable<Player.PlayerState> Players { get; set; }
     }
 }

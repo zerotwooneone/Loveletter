@@ -5,8 +5,8 @@ namespace ConsoleApp1.Player
 {
     public interface IPlayerFactory
     {
-        IRoundPlayer CreateRoundPlayer(IGamePlayer gameStatePlayer);
+        IRoundPlayerState CreateRoundPlayer(IGamePlayerState gameStatePlayerState);
         IList<IDiscardedCardState> CreateRoundDiscard();
-        ITurnPlayer CreateTurnPlayer(IRoundPlayer player);
+        ITurnPlayerState CreateTurnPlayer(IRoundPlayerState playerState);
     }
 }

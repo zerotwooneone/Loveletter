@@ -6,7 +6,7 @@ namespace ConsoleApp1.Round
 {
     public interface IInitialRoundState : IRoundState
     {
-        IEnumerable<IRoundPlayer> Players { get; }
+        IEnumerable<IRoundPlayerState> Players { get; }
         IEnumerable<IShufflableCardState> ShufflableDeck { get; }
     }
 }

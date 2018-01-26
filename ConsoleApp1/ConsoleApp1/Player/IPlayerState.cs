@@ -2,7 +2,7 @@ using System;
 
 namespace ConsoleApp1.Player
 {
-    public interface IPlayer
+    public interface IPlayerState
     {
         Guid Id { get; }
     }

@@ -14,9 +14,9 @@ namespace ConsoleApp1.Round
         {
             _deckFactory = deckFactory;
         }
-        public IInitialRoundState CreateRound(IEnumerable<IRoundPlayer> players)
+        public IInitialRoundState CreateRound(IEnumerable<IRoundPlayerState> players)
         {
-            IList<IRoundPlayer> remainingPlayers = null;
+            IList<IRoundPlayerState> remainingPlayers = null;
             IList<ISetAsideCardState> removedFromRound = CreateRemovedFromRound();
             IList<IDrawableCardState> drawDeck = null;
             IEnumerable<IShufflableCardState> shufflableDeck = _deckFactory.Create();
@@ -25,17 +25,17 @@ namespace ConsoleApp1.Round
                 removedFromRound,
                 drawDeck,
                 roundIndex: 0,
-                winningPlayer: null,
-                currentPlayer: null,
+                winningPlayerState: null,
+                currentPlayerState: null,
                 drawableTurnState: null,
                 discardableTurnState: null,
                 shufflableDeck: shufflableDeck);
             return round;
         }
 
-        public IList<IRoundPlayer> CreateRemainingPlayers()
+        public IList<IRoundPlayerState> CreateRemainingPlayers()
         {
-            return new List<IRoundPlayer>();
+            return new List<IRoundPlayerState>();
         }
 
         public IList<ISetAsideCardState> CreateRemovedFromRound()

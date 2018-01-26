@@ -7,6 +7,6 @@ namespace ConsoleApp1.Game
     public interface IGameTerminateService
     {
         
-        Task TerminateGame(IEnumerable<IGamePlayer> players);
+        Task TerminateGame(IEnumerable<IGamePlayerState> players);
     }
 }

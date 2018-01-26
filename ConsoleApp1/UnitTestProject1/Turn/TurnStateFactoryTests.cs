@@ -36,21 +36,21 @@ namespace UnitTestProject1.Turn
             IList<IDiscardedCardState> roundDiscard = new List<IDiscardedCardState>();
             IDiscardableCardState roundHand = new CardState(0, 0);
             Guid playerId = Guid.Empty;
-            IRoundPlayer player = new Player(playerId, roundDiscard, null, outOfRound: false, roundHand: roundHand);
+            IRoundPlayerState playerState = new PlayerState(playerId, roundDiscard, null, outOfRound: false, roundHand: roundHand);
 
             IList<IDiscardableCardState> turnHand = new[] { roundHand };
             IDiscardedCardState turnDiscard = null;
-            ITurnPlayer turnPlayer = new Player(playerId, null, turnHand, turnDiscard: turnDiscard);
-            var expected = turnPlayer;
+            ITurnPlayerState turnPlayerState = new PlayerState(playerId, null, turnHand, turnDiscard: turnDiscard);
+            var expected = turnPlayerState;
             _playerFactory
-                .Setup(pf => pf.CreateTurnPlayer(player))
-                .Returns(turnPlayer);
+                .Setup(pf => pf.CreateTurnPlayer(playerState))
+                .Returns(turnPlayerState);
 
             // Act
             TurnStateFactory factory = this.CreateFactory();
 
-            var turn = factory.CreateTurn(player);
-            var actual = turn.Player;
+            var turn = factory.CreateTurn(playerState);
+            var actual = turn.PlayerState;
 
             // Assert
             Assert.AreEqual(expected, actual);

@@ -7,6 +7,6 @@ namespace ConsoleApp1.Game
     public interface IGameState
     {
         Guid Id { get; }
-        IEnumerable<IGamePlayer> Players { get; }
+        IEnumerable<IGamePlayerState> Players { get; }
     }
 }

@@ -4,6 +4,6 @@ namespace ConsoleApp1.Turn
 {
     public interface ITurnStateFactory
     {
-        IDrawableTurnState CreateTurn(IRoundPlayer player);
+        IDrawableTurnState CreateTurn(IRoundPlayerState playerState);
     }
 }

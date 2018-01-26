@@ -42,7 +42,7 @@ namespace ConsoleApp1.Application
         {
             _doContinue = true;
             UserPlayerParams = _userService.GetPlayerParams();
-//UserPlayer = _playerFactory.CreatePlayer(UserPlayerParams);
+//UserPlayerState = _playerFactory.CreatePlayer(UserPlayerParams);
             LobbyParams lobbyParams=new LobbyParams
             {
                 Players = new PlayerParams[]{UserPlayerParams}
@@ -54,7 +54,7 @@ namespace ConsoleApp1.Application
 
         public PlayerParams UserPlayerParams { get; private set; }
 
-        public Player.Player UserPlayer { get; private set; }
+        public Player.PlayerState UserPlayerState { get; private set; }
 
         private void CreateLobby(LobbyParams lobbyParams)
         {

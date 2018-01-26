@@ -44,14 +44,14 @@ namespace UnitTestProject1.Round
         public void StartRound_RemainingPlayerCountIs2()
         {
             // Arrange
-            var player1 = new Player(Guid.Empty, null, null);
-            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            var player1 = new PlayerState(Guid.Empty, null, null);
+            IEnumerable<IRoundPlayerState> players = new[] { player1, new PlayerState(Guid.Empty, null, null) };
             var expected = players.Count();
             IShufflableCardState shufflableCard = new CardState(0, 0);
             IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
             IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
 
-            var remainingPlayers = new List<IRoundPlayer>();
+            var remainingPlayers = new List<IRoundPlayerState>();
             _roundFactory
                 .Setup(rf => rf.CreateRemainingPlayers())
                 .Returns(remainingPlayers);
@@ -99,13 +99,13 @@ namespace UnitTestProject1.Round
         public void StartRound_AllPlayersHaveHands()
         {
             // Arrange
-            var player1 = new Player(Guid.Empty, null, null);
-            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            var player1 = new PlayerState(Guid.Empty, null, null);
+            IEnumerable<IRoundPlayerState> players = new[] { player1, new PlayerState(Guid.Empty, null, null) };
             IShufflableCardState shufflableCard = new CardState(0, 0);
             IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
             IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
 
-            var remainingPlayers = new List<IRoundPlayer>();
+            var remainingPlayers = new List<IRoundPlayerState>();
             _roundFactory
                 .Setup(rf => rf.CreateRemainingPlayers())
                 .Returns(remainingPlayers);
@@ -152,13 +152,13 @@ namespace UnitTestProject1.Round
         public void StartRound_AllPlayersInRound()
         {
             // Arrange
-            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
-            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            var player1 = new PlayerState(Guid.Empty, null, null, outOfRound: true);
+            IEnumerable<IRoundPlayerState> players = new[] { player1, new PlayerState(Guid.Empty, null, null) };
             IShufflableCardState shufflableCard = new CardState(0, 0);
             IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
             IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
 
-            var remainingPlayers = new List<IRoundPlayer>();
+            var remainingPlayers = new List<IRoundPlayerState>();
             _roundFactory
                 .Setup(rf => rf.CreateRemainingPlayers())
                 .Returns(remainingPlayers);
@@ -205,13 +205,13 @@ namespace UnitTestProject1.Round
         public void StartRound_DrawDeckHasOneCard()
         {
             // Arrange
-            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
-            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            var player1 = new PlayerState(Guid.Empty, null, null, outOfRound: true);
+            IEnumerable<IRoundPlayerState> players = new[] { player1, new PlayerState(Guid.Empty, null, null) };
             IShufflableCardState shufflableCard = new CardState(0, 0);
             IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
             IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
 
-            var remainingPlayers = new List<IRoundPlayer>();
+            var remainingPlayers = new List<IRoundPlayerState>();
             _roundFactory
                 .Setup(rf => rf.CreateRemainingPlayers())
                 .Returns(remainingPlayers);
@@ -260,14 +260,14 @@ namespace UnitTestProject1.Round
         public void StartRound_CurrentPlayerSet()
         {
             // Arrange
-            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
+            var player1 = new PlayerState(Guid.Empty, null, null, outOfRound: true);
             var expected = player1;
-            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            IEnumerable<IRoundPlayerState> players = new[] { player1, new PlayerState(Guid.Empty, null, null) };
             IShufflableCardState shufflableCard = new CardState(0, 0);
             IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
             IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
 
-            var remainingPlayers = new List<IRoundPlayer>();
+            var remainingPlayers = new List<IRoundPlayerState>();
             _roundFactory
                 .Setup(rf => rf.CreateRemainingPlayers())
                 .Returns(remainingPlayers);
@@ -305,7 +305,7 @@ namespace UnitTestProject1.Round
             // Act
             RoundStartService service = CreateService();
             var round = service.StartRound(initialRound);
-            var actual = round.CurrentPlayer;
+            var actual = round.CurrentPlayerState;
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -315,14 +315,14 @@ namespace UnitTestProject1.Round
         public void StartRound_DiscardableStateNull()
         {
             // Arrange
-            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
+            var player1 = new PlayerState(Guid.Empty, null, null, outOfRound: true);
             IDiscardableTurnState expected = null;
-            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            IEnumerable<IRoundPlayerState> players = new[] { player1, new PlayerState(Guid.Empty, null, null) };
             IShufflableCardState shufflableCard = new CardState(0, 0);
             IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
             IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
 
-            var remainingPlayers = new List<IRoundPlayer>();
+            var remainingPlayers = new List<IRoundPlayerState>();
             _roundFactory
                 .Setup(rf => rf.CreateRemainingPlayers())
                 .Returns(remainingPlayers);
@@ -370,13 +370,13 @@ namespace UnitTestProject1.Round
         public void StartRound_DrawableStateSet()
         {
             // Arrange
-            var player1 = new Player(Guid.Empty, null, null, outOfRound: true);
-            IEnumerable<IRoundPlayer> players = new[] { player1, new Player(Guid.Empty, null, null) };
+            var player1 = new PlayerState(Guid.Empty, null, null, outOfRound: true);
+            IEnumerable<IRoundPlayerState> players = new[] { player1, new PlayerState(Guid.Empty, null, null) };
             IShufflableCardState shufflableCard = new CardState(0, 0);
             IEnumerable<IShufflableCardState> shuffleableDeck = new[] { shufflableCard };
             IInitialRoundState initialRound = new RoundState(players, null, null, null, shufflableDeck: shuffleableDeck);
 
-            var remainingPlayers = new List<IRoundPlayer>();
+            var remainingPlayers = new List<IRoundPlayerState>();
             _roundFactory
                 .Setup(rf => rf.CreateRemainingPlayers())
                 .Returns(remainingPlayers);

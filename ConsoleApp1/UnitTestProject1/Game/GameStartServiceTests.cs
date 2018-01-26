@@ -45,12 +45,12 @@ namespace UnitTestProject1.Game
         {
             // Arrange
             var player1Guid = Guid.Parse("115e08ed-510e-4b79-acbc-a40b2ee40d08");
-            var gamePlayer1 = new Player(player1Guid,null,null);
-            var players = new Dictionary<Guid, IGamePlayer>{{player1Guid, gamePlayer1}};
+            var gamePlayer1 = new PlayerState(player1Guid,null,null);
+            var players = new Dictionary<Guid, IGamePlayerState>{{player1Guid, gamePlayer1}};
             IRunningRoundState roundState=null;
             var initialGameState = new GameState(_gameId, players, roundState);
             
-            var roundPlayer1 = new Player(player1Guid, new List<IDiscardedCardState>(), new List<IDiscardableCardState>());
+            var roundPlayer1 = new PlayerState(player1Guid, new List<IDiscardedCardState>(), new List<IDiscardableCardState>());
             _PlayerFactory
                 .Setup(pf => pf.CreateRoundPlayer(gamePlayer1))
                 .Returns(roundPlayer1);
@@ -58,7 +58,7 @@ namespace UnitTestProject1.Game
             var initialRoundState = GetRoundState();
 
             
-            IEnumerable<IRoundPlayer> roundPlayers=new []
+            IEnumerable<IRoundPlayerState> roundPlayers=new []
             {
                 roundPlayer1,
             };
@@ -83,8 +83,8 @@ namespace UnitTestProject1.Game
         
         public static RoundState GetRoundState()
         {
-            var roundPlayers = new IRoundPlayer[0];
-            var remainingPlayers = new List<IRoundPlayer>();
+            var roundPlayers = new IRoundPlayerState[0];
+            var remainingPlayers = new List<IRoundPlayerState>();
             var shufflableDeck = new List<IShufflableCardState>();
             var removedFromRound = new List<ISetAsideCardState>();
             var roundDrawDeck = new List<IDrawableCardState>();

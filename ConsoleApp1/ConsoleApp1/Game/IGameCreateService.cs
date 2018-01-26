@@ -5,7 +5,7 @@ namespace ConsoleApp1.Game
 {
     public interface IGameCreateService
     {
-        IInitialGameState CreateGame(IEnumerable<IGamePlayer> players);
+        IInitialGameState CreateGame(IEnumerable<IGamePlayerState> players);
     }
 }
 

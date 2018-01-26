@@ -6,6 +6,6 @@ namespace ConsoleApp1.Round
     public interface IRoundStateFactory
     {
         RoundState Create(int roundIndex,
-            IEnumerable<Player.Player> players);
+            IEnumerable<Player.PlayerState> players);
     }
 }

@@ -35,9 +35,9 @@ namespace UnitTestProject1.Round
         public void CreateRound_SetsTwoPlayers()
         {
             // Arrange
-            IEnumerable<IRoundPlayer> players = new[] {
-                new Player(Guid.Parse("b0049b58-73a3-49a8-8ba1-f5d3fd9701a9"), null, null),
-                new Player(Guid.Parse("a7b9794d-a3f0-46ac-b69b-a2dbc3e12f18"), null, null) };
+            IEnumerable<IRoundPlayerState> players = new[] {
+                new PlayerState(Guid.Parse("b0049b58-73a3-49a8-8ba1-f5d3fd9701a9"), null, null),
+                new PlayerState(Guid.Parse("a7b9794d-a3f0-46ac-b69b-a2dbc3e12f18"), null, null) };
             var expected = players;
 
             IEnumerable<IShufflableCardState> shufflalbeDeck = new[] { new CardState(0, 1) };
@@ -58,9 +58,9 @@ namespace UnitTestProject1.Round
         public void CreateRound_SetsShuffleDeck()
         {
             // Arrange
-            IEnumerable<IRoundPlayer> players = new[] {
-                new Player(Guid.Parse("b0049b58-73a3-49a8-8ba1-f5d3fd9701a9"), null, null),
-                new Player(Guid.Parse("a7b9794d-a3f0-46ac-b69b-a2dbc3e12f18"), null, null) };
+            IEnumerable<IRoundPlayerState> players = new[] {
+                new PlayerState(Guid.Parse("b0049b58-73a3-49a8-8ba1-f5d3fd9701a9"), null, null),
+                new PlayerState(Guid.Parse("a7b9794d-a3f0-46ac-b69b-a2dbc3e12f18"), null, null) };
 
             IEnumerable<IShufflableCardState> shufflalbeDeck = new[] { new CardState(0, 1) };
             var expected = shufflalbeDeck;
@@ -81,9 +81,9 @@ namespace UnitTestProject1.Round
         public void CreateRound_ZeroRoundIndex()
         {
             // Arrange
-            IEnumerable<IRoundPlayer> players = new[] {
-                new Player(Guid.Parse("b0049b58-73a3-49a8-8ba1-f5d3fd9701a9"), null, null),
-                new Player(Guid.Parse("a7b9794d-a3f0-46ac-b69b-a2dbc3e12f18"), null, null) };
+            IEnumerable<IRoundPlayerState> players = new[] {
+                new PlayerState(Guid.Parse("b0049b58-73a3-49a8-8ba1-f5d3fd9701a9"), null, null),
+                new PlayerState(Guid.Parse("a7b9794d-a3f0-46ac-b69b-a2dbc3e12f18"), null, null) };
 
             IEnumerable<IShufflableCardState> shufflalbeDeck = new[] { new CardState(0, 1) };
             const int expected = 0;

@@ -7,11 +7,11 @@ namespace ConsoleApp1.Turn
 {
     public class TurnState: IDrawableTurnState, IDiscardableTurnState
     {
-        public ITurnPlayer Player { get; }
+        public ITurnPlayerState PlayerState { get; }
 
-        public TurnState(ITurnPlayer player, IDiscardableCardState startingHand)
+        public TurnState(ITurnPlayerState playerState, IDiscardableCardState startingHand)
         {
-            Player = player;
+            PlayerState = playerState;
             Hand = new []{ startingHand }.ToList();
         }
 

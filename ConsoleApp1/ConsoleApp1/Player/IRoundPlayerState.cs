@@ -3,7 +3,7 @@ using ConsoleApp1.Card;
 
 namespace ConsoleApp1.Player
 {
-    public interface IRoundPlayer: IPlayer
+    public interface IRoundPlayerState: IPlayerState
     {
         bool OutOfRound { get; set; }
         IDiscardableCardState RoundHand { get; set; }

@@ -5,6 +5,6 @@ namespace ConsoleApp1.Game
 {
     public interface IGameStateFactory
     {
-        GameState Create(Guid Id, IEnumerable<Player.Player> players);
+        GameState Create(Guid Id, IEnumerable<Player.PlayerState> players);
     }
 }

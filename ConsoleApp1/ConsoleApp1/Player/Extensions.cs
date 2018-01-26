@@ -4,7 +4,7 @@ namespace ConsoleApp1.Player
 {
     public static class Extensions
     {
-        public static IEnumerable<IRoundPlayer> CreateRoundPlayers(this IPlayerFactory playerFactory, IEnumerable<IGamePlayer> gameStatePlayers)
+        public static IEnumerable<IRoundPlayerState> CreateRoundPlayers(this IPlayerFactory playerFactory, IEnumerable<IGamePlayerState> gameStatePlayers)
         {
             foreach (var gameStatePlayer in gameStatePlayers)
             {

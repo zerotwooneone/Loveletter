@@ -6,8 +6,8 @@ namespace ConsoleApp1.Round
 {
     public interface IRoundFactory
     {
-        IInitialRoundState CreateRound(IEnumerable<IRoundPlayer> players);
-        IList<IRoundPlayer> CreateRemainingPlayers();
+        IInitialRoundState CreateRound(IEnumerable<IRoundPlayerState> players);
+        IList<IRoundPlayerState> CreateRemainingPlayers();
         IList<ISetAsideCardState> CreateRemovedFromRound();
     }
 }

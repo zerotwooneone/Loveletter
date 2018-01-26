@@ -10,10 +10,10 @@ namespace ConsoleApp1.Turn
         {
             _playerFactory = playerFactory;
         }
-        public IDrawableTurnState CreateTurn(IRoundPlayer player)
+        public IDrawableTurnState CreateTurn(IRoundPlayerState playerState)
         {
-            var turnPlayer = _playerFactory.CreateTurnPlayer(player);
-            var hand = player.RoundHand;
+            var turnPlayer = _playerFactory.CreateTurnPlayer(playerState);
+            var hand = playerState.RoundHand;
             var turnState = new TurnState(turnPlayer, hand);
             return turnState;
         }

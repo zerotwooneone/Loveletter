@@ -8,14 +8,14 @@ namespace ConsoleApp1.Game
 {
     public class GameState : IInitialGameState, IRunningGameState
     {
-        private readonly IDictionary<Guid, IGamePlayer> _players;
+        private readonly IDictionary<Guid, IGamePlayerState> _players;
         public IRunningRoundState RoundState { get; set; }
         public Guid Id { get; }
-        public IEnumerable<IGamePlayer> Players => _players.Values;
+        public IEnumerable<IGamePlayerState> Players => _players.Values;
         
         public GameState(Guid id,
             IDictionary<Guid, 
-                IGamePlayer> players,
+                IGamePlayerState> players,
             IRunningRoundState roundState = null)
         {
             Id = id;
