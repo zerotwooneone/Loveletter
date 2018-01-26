@@ -15,13 +15,20 @@ namespace ConsoleApp1.Player
 
         public IList<IDiscardedCardState> CreateRoundDiscard()
         {
-            return new List<IDiscardedCardState>();
+            return new List<IDiscardedCardState>(); 
         }
 
         public ITurnPlayer CreateTurnPlayer(IRoundPlayer player)
         {
+            var turnHand=CreateTurnHand();
+            turnHand.Add(player.RoundHand);
             var turnPlayer = new Player(player.Id,null,turnHand,outOfRound:false,points:0);
             return turnPlayer;
+        }
+
+        public IList<IDiscardableCardState> CreateTurnHand()
+        {
+            return new List<IDiscardableCardState>();
         }
     }
 }
