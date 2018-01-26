@@ -9,9 +9,12 @@ namespace ConsoleApp1.Turn
     {
         public ITurnPlayerState PlayerState { get; }
 
-        public TurnState(ITurnPlayerState playerState)
+        public TurnState(ITurnPlayerState playerState, IDrawableCardState turnDeck)
         {
             PlayerState = playerState;
+            TurnDeck = turnDeck;
         }
+
+        public IDrawableCardState TurnDeck { get; set; }
     }
 }

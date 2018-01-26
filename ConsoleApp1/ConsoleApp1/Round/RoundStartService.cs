@@ -2,6 +2,7 @@
 using System.Linq;
 using ConsoleApp1.Card;
 using ConsoleApp1.Deck;
+using ConsoleApp1.Extensions;
 using ConsoleApp1.Turn;
 
 namespace ConsoleApp1.Round
@@ -47,7 +48,10 @@ namespace ConsoleApp1.Round
             }
             int roundIndex = round.RoundIndex;
             var currentPlayer = roundPlayers.First();
-            var drawableTurnState = _turnStateFactory.CreateTurn(currentPlayer);
+
+            var turnDeck = shuffledDeck.RemoveLast();
+
+            var drawableTurnState = _turnStateFactory.CreateTurn(currentPlayer, turnDeck);
             var runningRound = new RoundState(roundPlayers,
                 remainingPlayers,
                 removedFromRound,

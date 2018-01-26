@@ -62,7 +62,8 @@ namespace UnitTestProject1.Round
 
             var drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
-            int drawableCardCount = players.Count() + cardSetAsideCount;
+            const int turnDeckCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
             var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
             _deckShuffleService
                 .Setup(dss => dss.Shuffle(shuffleableDeck))
@@ -81,9 +82,9 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1);
+            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn(player1))
+                .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
@@ -116,7 +117,8 @@ namespace UnitTestProject1.Round
 
             var drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
-            int drawableCardCount = players.Count() + cardSetAsideCount;
+            const int turnDeckCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
             var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
             _deckShuffleService
                 .Setup(dss => dss.Shuffle(shuffleableDeck))
@@ -135,9 +137,9 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1);
+            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn(player1))
+                .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
@@ -169,7 +171,8 @@ namespace UnitTestProject1.Round
 
             var drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
-            int drawableCardCount = players.Count() + cardSetAsideCount;
+            const int turnDeckCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
             var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
             _deckShuffleService
                 .Setup(dss => dss.Shuffle(shuffleableDeck))
@@ -188,9 +191,9 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1);
+            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn(player1))
+                .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
@@ -224,7 +227,8 @@ namespace UnitTestProject1.Round
             const int cardSetAsideCount = 1;
             var expected = new IDrawableCardState[] { new CardState(99, 108) };
             int drawableCardCount = players.Count() + cardSetAsideCount;
-            var drawableDeck = expected.Concat(Enumerable.Repeat(drawableCardState, drawableCardCount));
+            IDrawableCardState turnDeck = new CardState(88, 112);
+            var drawableDeck = expected.Concat(new[] { turnDeck }).Concat(Enumerable.Repeat(drawableCardState, drawableCardCount));
             _deckShuffleService
                 .Setup(dss => dss.Shuffle(shuffleableDeck))
                 .Returns(drawableDeck);
@@ -242,9 +246,9 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1);
+            IDrawableTurnState drawableTurnState = new TurnState(player1, turnDeck);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn(player1))
+                .Setup(tsf => tsf.CreateTurn(player1, turnDeck))
                 .Returns(drawableTurnState);
 
             // Act
@@ -278,7 +282,8 @@ namespace UnitTestProject1.Round
 
             var drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
-            int drawableCardCount = players.Count() + cardSetAsideCount;
+            const int turnDeckCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
             var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
             _deckShuffleService
                 .Setup(dss => dss.Shuffle(shuffleableDeck))
@@ -297,9 +302,9 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1);
+            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn(player1))
+                .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
@@ -333,7 +338,8 @@ namespace UnitTestProject1.Round
 
             var drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
-            int drawableCardCount = players.Count() + cardSetAsideCount;
+            const int turnDeckCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
             var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
             _deckShuffleService
                 .Setup(dss => dss.Shuffle(shuffleableDeck))
@@ -352,9 +358,9 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1);
+            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn(player1))
+                .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
@@ -387,7 +393,8 @@ namespace UnitTestProject1.Round
 
             var drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
-            int drawableCardCount = players.Count() + cardSetAsideCount;
+            const int turnDeckCount = 1;
+            int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
             var drawableDeck = Enumerable.Repeat(drawableCardState, drawableCardCount);
             _deckShuffleService
                 .Setup(dss => dss.Shuffle(shuffleableDeck))
@@ -406,10 +413,10 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1);
+            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
             var expected = drawableTurnState;
             _turnStateFactory
-                .Setup(tsf => tsf.CreateTurn(player1))
+                .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act

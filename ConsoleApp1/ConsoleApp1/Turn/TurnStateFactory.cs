@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Player;
+﻿using ConsoleApp1.Card;
+using ConsoleApp1.Player;
 
 namespace ConsoleApp1.Turn
 {
@@ -10,10 +11,10 @@ namespace ConsoleApp1.Turn
         {
             _playerFactory = playerFactory;
         }
-        public IDrawableTurnState CreateTurn(IRoundPlayerState playerState)
+        public IDrawableTurnState CreateTurn(IRoundPlayerState playerState, IDrawableCardState turnDeck)
         {
             var turnPlayer = _playerFactory.CreateTurnPlayer(playerState);
-            var turnState = new TurnState(turnPlayer);
+            var turnState = new TurnState(turnPlayer, turnDeck);
             return turnState;
         }
     }

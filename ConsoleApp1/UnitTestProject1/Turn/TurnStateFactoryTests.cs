@@ -45,11 +45,13 @@ namespace UnitTestProject1.Turn
             _playerFactory
                 .Setup(pf => pf.CreateTurnPlayer(playerState))
                 .Returns(turnPlayerState);
+            IDrawableCardState turnDeck = new CardState(44, 55);
 
             // Act
             TurnStateFactory factory = this.CreateFactory();
 
-            var turn = factory.CreateTurn(playerState);
+            
+            var turn = factory.CreateTurn(playerState, turnDeck);
             var actual = turn.PlayerState;
 
             // Assert
