@@ -15,7 +15,7 @@ namespace UnitTestProject1.Game
         private MockRepository _mockRepository;
 
         private Mock<IRoundFactory> _RoundFactory;
-        private Mock<IRoundStartService> _RoundStartService;
+        private Mock<IRoundStateFactory> _RoundStartService;
         private readonly Guid _gameId;
         private Mock<IPlayerFactory> _PlayerFactory;
 
@@ -30,7 +30,7 @@ namespace UnitTestProject1.Game
             _mockRepository = new MockRepository(MockBehavior.Strict);
 
             _RoundFactory = _mockRepository.Create<IRoundFactory>();
-            _RoundStartService = _mockRepository.Create<IRoundStartService>();
+            _RoundStartService = _mockRepository.Create<IRoundStateFactory>();
             _PlayerFactory = _mockRepository.Create<IPlayerFactory>();
         }
 

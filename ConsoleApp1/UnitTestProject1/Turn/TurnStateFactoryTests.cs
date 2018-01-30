@@ -40,21 +40,43 @@ namespace UnitTestProject1.Turn
 
             IList<IDiscardableCardState> turnHand = new[] { roundHand };
             IDiscardedCardState turnDiscard = null;
-            ITurnPlayerState turnPlayerState = new PlayerState(playerId, null, turnHand, turnDiscard: turnDiscard);
-            var expected = turnPlayerState;
+            IDrawablePlayerState initialTurnPlayerState = new PlayerState(playerId, null, turnHand, turnDiscard: turnDiscard);
+            var expected = initialTurnPlayerState;
             _playerFactory
                 .Setup(pf => pf.CreateTurnPlayer(playerState))
-                .Returns(turnPlayerState);
+                .Returns(initialTurnPlayerState);
             IDrawableCardState turnDeck = new CardState(44, 55);
 
             // Act
             TurnStateFactory factory = this.CreateFactory();
 
-            
+
             var turn = factory.CreateTurn(playerState, turnDeck);
-            var actual = turn.PlayerState;
+            var actual = turn.DrawablePlayerState;
 
             // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetDiscardable_SetsPlayer()
+        {
+            //arrange
+            Guid playerId = Guid.Empty;
+
+            IList<IDiscardableCardState> turnHand = new[] { new CardState(0, 1), };
+            var drawablePlayerState = new PlayerState(playerId, null, turnHand);
+            var discardablePlayerState = new PlayerState(playerId, null, turnHand);
+            var expected = discardablePlayerState;
+            _playerFactory
+                .Setup(pf => pf.GetDiscardable(playerId, turnHand))
+                .Returns(discardablePlayerState);
+
+            //act
+            var factory = CreateFactory();
+            var actual = factory.GetDiscardable(drawablePlayerState).DiscardablePlayer;
+
+            //assert
             Assert.AreEqual(expected, actual);
         }
 

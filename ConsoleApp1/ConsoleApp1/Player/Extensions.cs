@@ -11,5 +11,10 @@ namespace ConsoleApp1.Player
                 yield return playerFactory.CreateRoundPlayer(gameStatePlayer);
             }
         }
+
+        public static IDiscardablePlayerState GetDiscardable(this IPlayerFactory playerFactory, IDrawablePlayerState drawablePlayerState)
+        {
+            return playerFactory.GetDiscardable(drawablePlayerState.Id, drawablePlayerState.TurnHand);
+        }
     }
 }

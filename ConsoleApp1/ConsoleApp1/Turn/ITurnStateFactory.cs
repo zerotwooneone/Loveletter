@@ -6,5 +6,6 @@ namespace ConsoleApp1.Turn
     public interface ITurnStateFactory
     {
         IDrawableTurnState CreateTurn(IRoundPlayerState playerState, IDrawableCardState turnDeck);
+        IDiscardableTurnState GetDiscardable(IDrawablePlayerState drawablePlayerState); 
     }
 }

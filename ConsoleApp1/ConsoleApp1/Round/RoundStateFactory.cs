@@ -7,7 +7,7 @@ using ConsoleApp1.Turn;
 
 namespace ConsoleApp1.Round
 {
-    public class RoundStartService : IRoundStartService
+    public class RoundStateFactory : IRoundStateFactory
     {
         private readonly IDeckShuffleService _deckShuffleService;
         private readonly IRoundFactory _roundFactory;
@@ -15,7 +15,7 @@ namespace ConsoleApp1.Round
         private readonly IDeckRemovalService _deckRemovalService;
         private readonly ICardDrawService _cardDrawService;
 
-        public RoundStartService(IDeckShuffleService deckShuffleService,
+        public RoundStateFactory(IDeckShuffleService deckShuffleService,
             IRoundFactory roundFactory,
             ITurnStateFactory turnStateFactory,
             IDeckRemovalService deckRemovalService,

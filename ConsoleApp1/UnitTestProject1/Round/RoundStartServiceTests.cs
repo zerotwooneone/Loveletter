@@ -82,13 +82,13 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(drawableCardState, player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
-            RoundStartService service = CreateService();
+            RoundStateFactory service = CreateService();
             var round = service.StartRound(initialRound);
             var actual = round.RemainingPlayers.Count;
 
@@ -137,13 +137,13 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(drawableCardState, player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
-            RoundStartService service = CreateService();
+            RoundStateFactory service = CreateService();
             var round = service.StartRound(initialRound);
 
             // Assert
@@ -191,13 +191,13 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(drawableCardState, player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
-            RoundStartService service = CreateService();
+            RoundStateFactory service = CreateService();
             var round = service.StartRound(initialRound);
 
             // Assert
@@ -246,13 +246,13 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, turnDeck);
+            IDrawableTurnState drawableTurnState = new TurnState(turnDeck, player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1, turnDeck))
                 .Returns(drawableTurnState);
 
             // Act
-            RoundStartService service = CreateService();
+            RoundStateFactory service = CreateService();
             var round = service.StartRound(initialRound);
             var actual = round.DrawDeck;
 
@@ -302,13 +302,13 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(drawableCardState, player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
-            RoundStartService service = CreateService();
+            RoundStateFactory service = CreateService();
             var round = service.StartRound(initialRound);
             var actual = round.CurrentPlayerState;
 
@@ -358,13 +358,13 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(drawableCardState, player1);
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
-            RoundStartService service = CreateService();
+            RoundStateFactory service = CreateService();
             var round = service.StartRound(initialRound);
             var actual = round.DiscardableTurnState;
 
@@ -413,14 +413,14 @@ namespace UnitTestProject1.Round
                 .Setup(drs => drs.GetCardsToRemoveCount(players.Count()))
                 .Returns(cardSetAsideCount);
 
-            IDrawableTurnState drawableTurnState = new TurnState(player1, drawableCardState);
+            IDrawableTurnState drawableTurnState = new TurnState(drawableCardState, player1);
             var expected = drawableTurnState;
             _turnStateFactory
                 .Setup(tsf => tsf.CreateTurn(player1, drawableCardState))
                 .Returns(drawableTurnState);
 
             // Act
-            RoundStartService service = CreateService();
+            RoundStateFactory service = CreateService();
             var round = service.StartRound(initialRound);
             var actual = round.DrawableTurnState;
 
@@ -428,9 +428,9 @@ namespace UnitTestProject1.Round
             Assert.AreEqual(expected, actual);
         }
 
-        private RoundStartService CreateService()
+        private RoundStateFactory CreateService()
         {
-            return new RoundStartService(
+            return new RoundStateFactory(
                 _deckShuffleService.Object,
                 _roundFactory.Object,
                 _turnStateFactory.Object,

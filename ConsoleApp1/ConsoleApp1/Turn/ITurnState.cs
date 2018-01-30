@@ -4,6 +4,6 @@ namespace ConsoleApp1.Turn
 {
     public interface ITurnState
     {
-        ITurnPlayerState PlayerState { get; }
+        
     }
 }

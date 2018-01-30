@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ConsoleApp1.Card;
 
 namespace ConsoleApp1.Player
@@ -7,6 +8,7 @@ namespace ConsoleApp1.Player
     {
         IRoundPlayerState CreateRoundPlayer(IGamePlayerState gameStatePlayerState);
         IList<IDiscardedCardState> CreateRoundDiscard();
-        ITurnPlayerState CreateTurnPlayer(IRoundPlayerState playerState);
+        IDrawablePlayerState CreateTurnPlayer(IRoundPlayerState playerState);
+        IDiscardablePlayerState GetDiscardable(Guid id, IList<IDiscardableCardState> turnHand);
     }
 }

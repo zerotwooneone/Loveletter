@@ -3,9 +3,8 @@ using ConsoleApp1.Card;
 
 namespace ConsoleApp1.Player
 {
-    public interface ITurnPlayerState : IPlayerState
+    public interface IDrawablePlayerState : IPlayerState
     {
         IList<IDiscardableCardState> TurnHand { get; }
-        IDiscardedCardState TurnDiscard { get; set; }
     }
 }

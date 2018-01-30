@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ConsoleApp1.Card;
 
 namespace ConsoleApp1.Player
@@ -15,15 +16,20 @@ namespace ConsoleApp1.Player
 
         public IList<IDiscardedCardState> CreateRoundDiscard()
         {
-            return new List<IDiscardedCardState>(); 
+            return new List<IDiscardedCardState>();
         }
 
-        public ITurnPlayerState CreateTurnPlayer(IRoundPlayerState playerState)
+        public IDrawablePlayerState CreateTurnPlayer(IRoundPlayerState playerState)
         {
-            var turnHand=CreateTurnHand();
-            turnHand.Add(playerState.RoundHand);
-            var turnPlayer = new PlayerState(playerState.Id,null,turnHand,outOfRound:false,points:0);
+            IList<IDiscardableCardState> turnHand = null;
+            var turnPlayer = new PlayerState(playerState.Id, null, turnHand, outOfRound: false, points: 0);
             return turnPlayer;
+        }
+
+        public IDiscardablePlayerState GetDiscardable(Guid id, IList<IDiscardableCardState> turnHand)
+        {
+            IList<IDiscardedCardState> roundHand=null;
+            return new PlayerState(id, roundHand, turnHand, outOfRound: false, points: 0, roundHand: null, turnDiscard: null);
         }
 
         public IList<IDiscardableCardState> CreateTurnHand()
