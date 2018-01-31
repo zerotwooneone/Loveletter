@@ -6,17 +6,17 @@ namespace ConsoleApp1.Card
 {
     public static class Extensions
     {
-        public static IDiscardableCardState Draw(this ICardDrawService cardDrawService, IList<IDrawableCardState> deck)
+        public static IDiscardableCardState Draw(this ICardStateFactory cardStateFactory, IList<IDrawableCardState> deck)
         {
             var drawableCardState = deck.RemoveLast();
-            var result = cardDrawService.Draw(drawableCardState);
+            var result = cardStateFactory.Draw(drawableCardState);
             return result;
         }
 
-        public static ISetAsideCardState SetAside(this ICardDrawService cardDrawService, IList<IDrawableCardState> deck)
+        public static ISetAsideCardState SetAside(this ICardStateFactory cardStateFactory, IList<IDrawableCardState> deck)
         {
             var drawableCardState = deck.RemoveLast();
-            var result = cardDrawService.SetAside(drawableCardState);
+            var result = cardStateFactory.SetAside(drawableCardState);
             return result;
         }
     }

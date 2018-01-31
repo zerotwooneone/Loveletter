@@ -20,7 +20,7 @@ namespace UnitTestProject1.Round
         private Mock<IRoundFactory> _roundFactory;
         private Mock<ITurnStateFactory> _turnStateFactory;
         private Mock<IDeckRemovalService> _deckRemovalService;
-        private Mock<ICardDrawService> _cardDrawService;
+        private Mock<ICardStateFactory> _cardDrawService;
 
         [TestInitialize]
         public void TestInitialize()
@@ -31,7 +31,7 @@ namespace UnitTestProject1.Round
             _roundFactory = _mockRepository.Create<IRoundFactory>();
             _turnStateFactory = _mockRepository.Create<ITurnStateFactory>();
             _deckRemovalService = _mockRepository.Create<IDeckRemovalService>();
-            _cardDrawService = _mockRepository.Create<ICardDrawService>();
+            _cardDrawService = _mockRepository.Create<ICardStateFactory>();
         }
 
         [TestCleanup]

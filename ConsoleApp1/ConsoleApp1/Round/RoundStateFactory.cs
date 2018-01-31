@@ -13,19 +13,19 @@ namespace ConsoleApp1.Round
         private readonly IRoundFactory _roundFactory;
         private readonly ITurnStateFactory _turnStateFactory;
         private readonly IDeckRemovalService _deckRemovalService;
-        private readonly ICardDrawService _cardDrawService;
+        private readonly ICardStateFactory _cardStateFactory;
 
         public RoundStateFactory(IDeckShuffleService deckShuffleService,
             IRoundFactory roundFactory,
             ITurnStateFactory turnStateFactory,
             IDeckRemovalService deckRemovalService,
-            ICardDrawService cardDrawService)
+            ICardStateFactory cardStateFactory)
         {
             _deckShuffleService = deckShuffleService;
             _roundFactory = roundFactory;
             _turnStateFactory = turnStateFactory;
             _deckRemovalService = deckRemovalService;
-            _cardDrawService = cardDrawService;
+            _cardStateFactory = cardStateFactory;
         }
 
         public IRunningRoundState StartRound(IInitialRoundState round)
@@ -36,14 +36,14 @@ namespace ConsoleApp1.Round
             foreach (var roundPlayer in roundPlayers)
             {
                 roundPlayer.OutOfRound = false;
-                roundPlayer.RoundHand = _cardDrawService.Draw(shuffledDeck);
+                roundPlayer.RoundHand = _cardStateFactory.Draw(shuffledDeck);
                 remainingPlayers.Add(roundPlayer);
             }
             var removedFromRound = _roundFactory.CreateRemovedFromRound();
             var cardsToRemoveCount = _deckRemovalService.GetCardsToRemoveCount(roundPlayers.Count());
             for (int removedCardIndex = 0; removedCardIndex < cardsToRemoveCount; removedCardIndex++)
             {
-                var removedCard = _cardDrawService.SetAside(shuffledDeck);
+                var removedCard = _cardStateFactory.SetAside(shuffledDeck);
                 removedFromRound.Add(removedCard);
             }
             int roundIndex = round.RoundIndex;
