@@ -32,6 +32,14 @@ namespace ConsoleApp1.Player
             return new PlayerState(id, roundHand, turnHand, outOfRound: false, points: 0, roundHand: null, turnDiscard: null);
         }
 
+        public IRoundPlayerState EndTurn(IDiscardablePlayerState player, IList<IDiscardedCardState> roundDiscard, bool OutOfRound = false, bool IsProtected = false)
+        {
+            roundDiscard.Add(player.TurnDiscard);
+            IList<IDiscardableCardState> turnHand = null;
+            var roundPlayer = new PlayerState(player.Id, roundDiscard, turnHand, outOfRound: false, points: 0, roundHand: null, turnDiscard: null);
+            return roundPlayer;
+        }
+
         public IList<IDiscardableCardState> CreateTurnHand()
         {
             return new List<IDiscardableCardState>();

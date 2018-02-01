@@ -60,7 +60,7 @@ namespace UnitTestProject1.Round
                 .Setup(rf => rf.CreateRemovedFromRound())
                 .Returns(removedFromRound);
 
-            var drawableCardState = new CardState(0, 0);
+            IDrawableCardState drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
             const int turnDeckCount = 1;
             int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
@@ -115,7 +115,7 @@ namespace UnitTestProject1.Round
                 .Setup(rf => rf.CreateRemovedFromRound())
                 .Returns(removedFromRound);
 
-            var drawableCardState = new CardState(0, 0);
+            IDrawableCardState drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
             const int turnDeckCount = 1;
             int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
@@ -169,7 +169,7 @@ namespace UnitTestProject1.Round
                 .Setup(rf => rf.CreateRemovedFromRound())
                 .Returns(removedFromRound);
 
-            var drawableCardState = new CardState(0, 0);
+            IDrawableCardState drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
             const int turnDeckCount = 1;
             int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
@@ -223,7 +223,7 @@ namespace UnitTestProject1.Round
                 .Setup(rf => rf.CreateRemovedFromRound())
                 .Returns(removedFromRound);
 
-            var drawableCardState = new CardState(0, 0);
+            IDrawableCardState drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
             var expected = new IDrawableCardState[] { new CardState(99, 108) };
             int drawableCardCount = players.Count() + cardSetAsideCount;
@@ -280,7 +280,7 @@ namespace UnitTestProject1.Round
                 .Setup(rf => rf.CreateRemovedFromRound())
                 .Returns(removedFromRound);
 
-            var drawableCardState = new CardState(0, 0);
+            IDrawableCardState drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
             const int turnDeckCount = 1;
             int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
@@ -336,7 +336,7 @@ namespace UnitTestProject1.Round
                 .Setup(rf => rf.CreateRemovedFromRound())
                 .Returns(removedFromRound);
 
-            var drawableCardState = new CardState(0, 0);
+            IDrawableCardState drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
             const int turnDeckCount = 1;
             int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;
@@ -391,7 +391,7 @@ namespace UnitTestProject1.Round
                 .Setup(rf => rf.CreateRemovedFromRound())
                 .Returns(removedFromRound);
 
-            var drawableCardState = new CardState(0, 0);
+            IDrawableCardState drawableCardState = new CardState(0, 0);
             const int cardSetAsideCount = 1;
             const int turnDeckCount = 1;
             int drawableCardCount = players.Count() + cardSetAsideCount + turnDeckCount;

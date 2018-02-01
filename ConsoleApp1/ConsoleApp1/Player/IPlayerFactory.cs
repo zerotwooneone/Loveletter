@@ -10,5 +10,6 @@ namespace ConsoleApp1.Player
         IList<IDiscardedCardState> CreateRoundDiscard();
         IDrawablePlayerState CreateTurnPlayer(IRoundPlayerState playerState);
         IDiscardablePlayerState GetDiscardable(Guid id, IList<IDiscardableCardState> turnHand);
+        IRoundPlayerState EndTurn(IDiscardablePlayerState player, IList<IDiscardedCardState> roundDiscard, bool OutOfRound = false, bool IsProtected = false);
     }
 }

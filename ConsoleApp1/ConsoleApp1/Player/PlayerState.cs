@@ -10,6 +10,7 @@ namespace ConsoleApp1.Player
         public bool OutOfRound { get; set; }
         public IDiscardableCardState RoundHand { get; set; }
         public IList<IDiscardedCardState> RoundDiscard { get; }
+        public bool Protected { get; set; }
         public int Points { get; set; }
         public IList<IDiscardableCardState> TurnHand { get; }
         public IDiscardedCardState TurnDiscard { get; set; }
@@ -20,7 +21,8 @@ namespace ConsoleApp1.Player
             bool outOfRound = false,
             int points = 0,
             IDiscardableCardState roundHand = null,
-            IDiscardedCardState turnDiscard = null)
+            IDiscardedCardState turnDiscard = null,
+            bool isProtected=false)
         {
             Id = id;
             OutOfRound = outOfRound;
@@ -29,6 +31,7 @@ namespace ConsoleApp1.Player
             RoundHand = roundHand;
             TurnDiscard = turnDiscard;
             TurnHand = turnHand;
+            Protected = isProtected;
         }
     }
 }

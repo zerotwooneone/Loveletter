@@ -1,7 +1,6 @@
 ﻿namespace ConsoleApp1.Player
 {
-    public interface ITargetablePlayerState : IPlayerState
+    public interface ITargetablePlayerState : IRoundPlayerState
     {
-        
     }
 }

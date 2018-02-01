@@ -8,5 +8,6 @@ namespace ConsoleApp1.Player
         bool OutOfRound { get; set; }
         IDiscardableCardState RoundHand { get; set; }
         IList<IDiscardedCardState> RoundDiscard { get; }
+        bool Protected { get; set; }
     }
 }

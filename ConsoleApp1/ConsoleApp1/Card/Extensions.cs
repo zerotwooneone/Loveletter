@@ -19,5 +19,12 @@ namespace ConsoleApp1.Card
             var result = cardStateFactory.SetAside(drawableCardState);
             return result;
         }
+
+        public static IDiscardableCardState Draw(this ICardStateFactory cardStateFactory, IList<ISetAsideCardState> deck)
+        {
+            var drawableCardState = deck.RemoveLast();
+            var result = cardStateFactory.Draw(drawableCardState);
+            return result;
+        }
     }
 }
